@@ -30,4 +30,4 @@ function requestor(movie) {
   });
 }
 
-omdbSearch();
+module.exports = omdbSearch

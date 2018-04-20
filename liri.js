@@ -43,6 +43,7 @@ function Start() {
       } else if (res.choice === "spotify this song") {
         spotifySearch();
       } else if (res.choice === "movie this") {
+        omdbSearch();
       } else if (res.choice === "do what it says") {
       } else {
         console.log("error");
