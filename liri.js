@@ -39,11 +39,14 @@ function Start() {
     ])
     .then(function(res) {
       if (res.choice === "my tweets") {
+        twitterSearch();
       } else if (res.choice === "spotify this song") {
+        spotifySearch();
       } else if (res.choice === "movie this") {
       } else if (res.choice === "do what it says") {
       } else {
         console.log("error");
+        return;
       }
     });
 }
