@@ -30,4 +30,7 @@ function requestor(movie) {
   });
 }
 
-module.exports = omdbSearch
+module.exports = {
+  omdbSearch,
+  requestor
+};

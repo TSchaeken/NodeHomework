@@ -42,4 +42,4 @@ function invader(name){
 }
 
 
-module.exports = twitterSearch
+module.exports = {twitterSearch, invader}

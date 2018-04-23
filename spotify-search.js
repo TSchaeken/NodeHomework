@@ -14,25 +14,60 @@ function Songer(song = "The Sign") {
       if (err) {
         return console.log("Error occurred: " + err);
       }
-
-      console.log(data.tracks.items);
+      console.log(data.tracks.items[0].album.artists);
     });
-  })
+  });
 }
 
-
-function spotifySearch(){
-    inquirer.prompt([
-        {
-            name: 'song',
-            message: 'What song would you like to look up?'
-        }
-    ]).then(function(res){
-        var song = Songer(res.song)
-        return song
-    }).then(function(res){
-        console.log(res)
+function spotifySearch() {
+  inquirer
+    .prompt([
+      {
+        name: "song",
+        message: "What song would you like to look up?"
+      }
+    ])
+    .then(function(res) {
+      var song = Songer(res.song);
+      return song;
     })
-}
+  }
 
-module.exports = spotifySearch
+module.exports = {
+  Songer,
+  spotifySearch
+};
+
+spotifySearch();
+
+
+
+// [ { album:
+//   { album_type: 'album',
+//     artists: [Array],
+//     available_markets: [Array],
+//     external_urls: [Object],
+//     href: 'https://api.spotify.com/v1/albums/5ll74bqtkcXlKE7wwkMq4g',
+//     id: '5ll74bqtkcXlKE7wwkMq4g',
+//     images: [Array],
+//     name: 'Late Registration',
+//     release_date: '2005-09-30',
+//     release_date_precision: 'day',
+//     type: 'album',
+//     uri: 'spotify:album:5ll74bqtkcXlKE7wwkMq4g' },
+//  artists: [ [Object], [Object] ],
+//  available_markets: [ 'CA', 'MX', 'US' ],
+//  disc_number: 1,
+//  duration_ms: 207626,
+//  explicit: true,
+//  external_ids: { isrc: 'USUM70500143' },
+//  external_urls:
+//   { spotify: 'https://open.spotify.com/track/1PS1QMdUqOal0ai3Gt7sDQ' },
+//  href: 'https://api.spotify.com/v1/tracks/1PS1QMdUqOal0ai3Gt7sDQ',
+//  id: '1PS1QMdUqOal0ai3Gt7sDQ',
+//  name: 'Gold Digger',
+//  popularity: 76,
+//  preview_url: null,
+//  track_number: 4,
+//  type: 'track',
+//  uri: 'spotify:track:1PS1QMdUqOal0ai3Gt7sDQ' } ]

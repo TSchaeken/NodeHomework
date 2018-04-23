@@ -10,10 +10,14 @@ const inquirer = require("inquirer");
 //extra .js files and .env generated keys
 
 const keys = require("./keys.js");
-const twitterSearch = require("./twitter-search");
-const spotifySearch = require("./spotify-search");
-const omdbSearch = require("./omdb-search");
+const spot = require ('./spotify-search');
+const spotifySearch = spot.spotifySearch;
+const twit = require('./twitter-search');
+const twitterSearch = twit.twitterSearch;
+const omdb = require("./omdb-search");
+const omdbSearch = omdb.omdbSearch;
 const special = require("./special");
+const specialRead = special.specialRead;
 
 //attaching keys to requests
 
@@ -45,6 +49,7 @@ function Start() {
       } else if (res.choice === "movie this") {
         omdbSearch();
       } else if (res.choice === "do what it says") {
+        specialRead();
       } else {
         console.log("error");
         return;
