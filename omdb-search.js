@@ -10,17 +10,25 @@ function omdbSearch() {
       }
     ])
     .then(function(res) {
-      let mmmmm = requestor(res.movie);
-      return mmmmm;
+      let movie = requestor(res.movie);
+      return movie;
     })
     .then(function(res) {
-      console.log(res);
+      let response = JSON.parse(res.body)
+      console.log('|------------------------------------------|')
+      console.log('Movie title: ' + response.Title);
+      console.log('Movie release year: '+ response.Year);
+      console.log('Movie language: ' + response.Language);
+      console.log('Movie plot: ' + response.Plot);
+      console.log('Movie IMDB rating: ' + response.Ratings[1].Value);
+      console.log('Movie Rotten Tomatoes rating: ' + response.Ratings[0].Value);
+      console.log('|------------------------------------------|')
     });
 }
 
 function requestor(movie) {
   return new Promise(function(res, rej) {
-    request("http://www.omdbapi.com/?apikey=trilogy&t=" + movie, function(
+    request("http://www.omdbapi.com/?t=" + movie +"&apikey=trilogy", function(
       error,
       response,
       body
@@ -34,3 +42,5 @@ module.exports = {
   omdbSearch,
   requestor
 };
+
+omdbSearch();

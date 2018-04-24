@@ -6,7 +6,7 @@ const Spotify = require("node-spotify-api");
 const spotify = new Spotify(keys.spotify);
 
 function Songer(song = "The Sign") {
-  return new Promise(function(res, req) {
+  return new Promise(function(resolve, reject) {
     spotify.search({ type: "track", query: song, limit: 1 }, function(
       err,
       data
@@ -14,10 +14,12 @@ function Songer(song = "The Sign") {
       if (err) {
         return console.log("Error occurred: " + err);
       }
-      console.log(data.tracks.items[0].album.artists);
+      resolve(data);
     });
   });
 }
+
+var song;
 
 function spotifySearch() {
   inquirer
@@ -28,10 +30,20 @@ function spotifySearch() {
       }
     ])
     .then(function(res) {
-      var song = Songer(res.song);
-      return song;
+      song = res.song
+      var info = Songer(res.song);
+      return info;
     })
-  }
+    .then(function(res) {
+      let response = res.tracks.items[0].album;
+      console.log('|------------------------------------------|')
+      console.log(`You searched for ${song}`);
+      console.log(`Album with ${song}: ` + response.name);
+      console.log(`Artist who performed ${song}: ` + response.artists[0].name);
+      console.log(`Preview of ${song}: ` + JSON.stringify(response.external_urls.spotify, null, 4));
+      console.log('|------------------------------------------|')
+    });
+}
 
 module.exports = {
   Songer,
@@ -39,8 +51,6 @@ module.exports = {
 };
 
 spotifySearch();
-
-
 
 // [ { album:
 //   { album_type: 'album',
